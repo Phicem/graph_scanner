@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>GRAPH - Documentation</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="GRAPH - Documentation" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="GRAPH - Documentation" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"GRAPH - Documentation","url":"/README.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/"></a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/README.html">GRAPH - Documentation</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <h1 id="graph-scanner---project-page">GRAPH SCANNER - PROJECT PAGE</h1>
+
+<p>This software intends to ease the process of extracting numerical data from a graph. The user loads the image of the graph, manually clicks on the datapoints to extract, and send the data to the clipboard.</p>
+
+<h2 id="detailed-description">Detailed description</h2>
+<p>Sometimes, interesting numerical data is available as a graph embedded in a picture, instead of a data table. When the data must be processed or used in a calculation, one has to manually choose a few points on the graph and extract their coordinates, in order to create a data table. This program aims at assisting the user in this laborious process. The image is printed on the screen, and the user can click on the curve to mark the points of interest that will be extracted from the graph. The scale, ie the conversion factor between pixels on the screen and the real values, is inferred by locating vertical lines of known abcissa, and horizontal lines of known ordinate (usually the axes of the graph). With the points (and their coordinates in pixels) and the scale, the program can output a data table consistent with the original data.</p>
+
+<p><img src="screenshot.png" alt="Screenshot" /></p>
+
+<p>Example of output stored in clipboard:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>26.666666666666654	7.499999999999984
+31.698113207547163	9.687499999999993
+46.54088050314464	21.875
+77.23270440251572	60.62500000000001
+</code></pre></div></div>
+
+<h2 id="how-to-use-this-program">How to use this program</h2>
+
+<p>Load the image with the “Browse image” button.</p>
+
+<p>Adjust the position of the borders (the movable vertical and horizontal lines forming a rectangle around the graph) to match any line of known coordinates. Precision can be increased by zooming in (see “Navigation” below).</p>
+
+<p>Create points (by left clicking) along the curve.</p>
+
+<p>Enter the real scale of the graph by indicating the coordinates of the movable borders in the proper textboxes (xmin, xmax, ymin, ymax).</p>
+
+<p>Export the data to the clipbloard (with the “Export Data” button).</p>
+
+<h2 id="navigaton-in-the-graphics-area">Navigaton in the graphics area</h2>
+
+<p>Zoom in/out: ctrl + wheel</p>
+
+<p>Move inside the image: ctrl + left click</p>
+
+<p>Move a point: left click</p>
+
+<p>Remove a point: right click</p>
+
+<p>Move a border : left click</p>
+
+<p>Adjust the thickness of the points and the borders: alt + wheel</p>
+
+<h2 id="config-file">Config file</h2>
+
+<p>A config file is automatically generated when the program is run for the first time. On Windows, the config file is usually in <code class="language-plaintext highlighter-rouge">C:\Documents and Settings\USERNAME\Local Settings\Application Data\graph\graphscanner</code>. On Linux, it should be found in <code class="language-plaintext highlighter-rouge">/home/USERNAME/.config/graphscanner</code>.</p>
+
+<p>The config file sets the color of the points, and the colors and thickness of the borders. For the moment, changing these parameters is only possible by editing the config file (there is no GUI for that yet).</p>
+
+<p>Colors must be either a name (list available at <a href="https://upload.wikimedia.org/wikipedia/commons/2/2b/SVG_Recognized_color_keyword_names.svg">https://upload.wikimedia.org/wikipedia/commons/2/2b/SVG_Recognized_color_keyword_names.svg</a>) or a RGB color with the following format: #RRGGBB (R,G and B being an hexadecimal character). For instance, for the red color, either “red” or “#FF0000” are correct inputs. In case of incorrect input, a default color will be used.</p>
+
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading"></h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name"></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
