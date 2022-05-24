@@ -1,6 +1,6 @@
 ---
 layout: default
-title: GRAPH - Documentation
+title: Graph Scanner - Documentation
 #description: Module documentation
 ---
 # GRAPH SCANNER - PROJECT PAGE
@@ -24,6 +24,8 @@ Example of output stored in clipboard:
 
 
 ## How to use this program
+
+Run `graph_scanner.py`.
 
 Load the image with the "Browse image" button.
 
