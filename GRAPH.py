@@ -689,31 +689,21 @@ if __name__ == "__main__":
 ##TODO##
 
     #BUGS
-        # help button won't work on some platforms
-        # when background is zoomed and points are not, it's difficult to create a point
-        # When wheel scale factor is exactly one, the size of the points is strange
-        # When scaling with alt wheel, the thin line disappears
+        # help button won't work on some platforms?
 
     #IMPROVEMENTS
-        # need some room around the border
         # keyboard shortcuts (quit, export, etc.)
-        # change borders thickness according to points thickness
-        # I want a larger clicking area for the borders
         # set lines as centered around zero, and use setPos instead of changing line coordinates
-        # QLineEdits must be smaller
-        # I'd like CGUIPoints to be able to destroy themselves, but python is NOT reliable on those things...
         # User input checkings must occur in the model (and throw an exception that sends the user a graphical message), not directly in the GUI!
-        # Inkscape's code for rectangle resizing?
+        # Use inkscape's code for rectangle resizing?
         # Improve the help pages (add css, add images, give the location of the config file, make the color list available offline, etc.)
 
 
     # MISSING FEATURES
         # allow changes in keyboard shortcuts and mouse behaviors?
         # Thin dashed-line outsite the rectangle to ease alignment
-        # What if user enters text? Can't we send a warning (but still allow text, or we'd annoy the user)
         # How can I display the unclickable area outside of the image in the canvas?
         # Import image from clipboard
-        # Real param manager, with a isValid function for each param, and a valid default value for each param (default values must be stored in one single place
         # export data to file (and not only clipboard)
         # ability to rotate the background image
         # a check box to decide whether to sort the points (xy graph), or not (parametric graph)
