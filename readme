@@ -1,1 +1,1 @@
-Dependencies: python2-PyQt4 + appdirs
+Dependencies: python3-PyQt5 + appdirs + python3-PyQt5-svg

@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 ### Architecture notes ###
 # The model is an autonomous piece of software, it has its own features and its own specifications. It should not be used via signals but called directly. However, the model may send signals to notify its changes.
 # The view is autonomous too. It provides with an interface from which low level signals (like a click) are sent. The view shoud not be smart.
@@ -7,9 +7,13 @@
 #
 #
 
+# To create a breakpoint:
+#Qt.pyqtRemoveInputHook()
+#pdb.set_trace()
+
 import pdb
 import time
-from PyQt4 import QtGui, QtCore, QtSvg,Qt
+from PyQt5 import QtGui, QtCore, QtSvg, Qt, QtWidgets
 import os
 import sys
 sys.path.append('appdirs')
@@ -130,15 +134,15 @@ class CModel(QtCore.QObject):
                 (new_x,new_y) = point
                 output +=  '%s%s%s\n' % (new_x, self.GM.param_manager.param_dict["output_separator"],new_y)
             Qt.QApplication.clipboard().setText(output)
-            info_message = QtGui.QMessageBox(text="Output saved in clipboard")
-            info_message.addButton(QtGui.QMessageBox.Ok)
+            info_message = QtWidgets.QMessageBox(text="Output saved in clipboard")
+            info_message.addButton(QtWidgets.QMessageBox.Ok)
             info_message.exec_()
                 
                 
 
         else:
-            error_message = QtGui.QMessageBox(text="Invalid scale. Use '.' as the decimal symbol.")
-            error_message.addButton(QtGui.QMessageBox.Ok)
+            error_message = QtWidgets.QMessageBox(text="Invalid scale. Use '.' as the decimal symbol.")
+            error_message.addButton(QtWidgets.QMessageBox.Ok)
             error_message.exec_()
 
 
@@ -260,17 +264,17 @@ def QPen(QColor,width):
     pen.setWidth(int(width))
     return pen
 
-class CGUIPoint(QtGui.QGraphicsItemGroup):
+class CGUIPoint(QtWidgets.QGraphicsItemGroup):
     def __init__(self, GM, ref, x, y):
         self.ref = ref
         self.GM = GM
-        QtGui.QGraphicsItemGroup.__init__(self, parent = None)
+        QtWidgets.QGraphicsItemGroup.__init__(self, parent = None)
         # Configuring the item
         user_color =  self.GM.param_manager.param_dict["point_color"]
         pen = QPen(getQtColor(user_color), self.GM.GUI.pen_point_width)
-        line_1 = QtGui.QGraphicsLineItem(-10, -10, 10, 10)
+        line_1 = QtWidgets.QGraphicsLineItem(-10, -10, 10, 10)
         line_1.setPen(pen)
-        line_2 = QtGui.QGraphicsLineItem(-10, 10, 10, -10)
+        line_2 = QtWidgets.QGraphicsLineItem(-10, 10, 10, -10)
         line_2.setPen(pen)
         self.addToGroup(line_1)
         self.addToGroup(line_2)
@@ -302,9 +306,9 @@ class CGUIPoint(QtGui.QGraphicsItemGroup):
     def removeFromScene(self):
         self.scene().removeItem(self)
 
-class QGUILineEdit(QtGui.QLineEdit):
+class QGUILineEdit(QtWidgets.QLineEdit):
     def __init__(self, name, GM):
-        QtGui.QLineEdit.__init__(self)
+        QtWidgets.QLineEdit.__init__(self)
         self.name = name
         self.GM = GM
         self.editingFinished.connect(self.editHandler)
@@ -312,10 +316,10 @@ class QGUILineEdit(QtGui.QLineEdit):
     def editHandler(self):
         self.GM.coordsMustChange(self.name, str(self.text()))
 
-class CWin(QtGui.QWidget):
+class CWin(QtWidgets.QWidget):
     def __init__(self, GM, GUI):
         # Creating window
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.setWindowTitle('Graph scanner')
 
         self.GM = GM
@@ -324,32 +328,32 @@ class CWin(QtGui.QWidget):
         self.canvas = Canvas(GM, self)
 
         # Creating buttons
-        self.btn_help = QtGui.QPushButton("Help and commands",self)
+        self.btn_help = QtWidgets.QPushButton("Help and commands",self)
         self.btn_help.clicked.connect(displayHelpMessage)
 
-        self.btn_change_image = QtGui.QPushButton("Browse image",self)
+        self.btn_change_image = QtWidgets.QPushButton("Browse image",self)
         self.btn_change_image.clicked.connect(GUI.handleChangeImage)
 
-        self.btn_quit = QtGui.QPushButton("Exit program",self)
+        self.btn_quit = QtWidgets.QPushButton("Exit program",self)
         self.btn_quit.clicked.connect(GUI.handleQuit)
 
-        self.btn_export =  QtGui.QPushButton("Export data to clipboard",self)
+        self.btn_export =  QtWidgets.QPushButton("Export data to clipboard",self)
         self.btn_export.clicked.connect(GM.dataMustBeExported)
 
         # Button for development
-        #self.btn_debug = QtGui.QPushButton("Load test image",self)
+        #self.btn_debug = QtWidgets.QPushButton("Load test image",self)
         #self.btn_debug.clicked.connect(GUI.loadTest)
 
         # Debuging label
-        self.debug_label = QtGui.QLabel("Default text", self)
+        self.debug_label = QtWidgets.QLabel("Default text", self)
 
         # Coordinates
-        self.coords_layout = QtGui.QGridLayout()
-        self.label_x = QtGui.QLabel("X axis", self)
-        self.label_y = QtGui.QLabel("Y axis", self)
-        self.label_min = QtGui.QLabel("Min", self)
+        self.coords_layout = QtWidgets.QGridLayout()
+        self.label_x = QtWidgets.QLabel("X axis", self)
+        self.label_y = QtWidgets.QLabel("Y axis", self)
+        self.label_min = QtWidgets.QLabel("Min", self)
         self.label_min.setAlignment(QtCore.Qt.AlignHCenter)
-        self.label_max = QtGui.QLabel("Max", self)
+        self.label_max = QtWidgets.QLabel("Max", self)
         self.label_max.setAlignment(QtCore.Qt.AlignHCenter)
         self.xmin = QGUILineEdit("xmin", GM = self.GM)
         self.xmax = QGUILineEdit("xmax", GM = self.GM)
@@ -365,7 +369,7 @@ class CWin(QtGui.QWidget):
         self.coords_layout.addWidget(self.ymax,2,2)
 
         # Defining layout
-        self.vbox = QtGui.QVBoxLayout()
+        self.vbox = QtWidgets.QVBoxLayout()
         #self.vbox.addWidget(self.btn_debug)
         self.vbox.addWidget(self.btn_help)
         self.vbox.addWidget(self.btn_change_image)
@@ -423,21 +427,21 @@ class CGUI:
             self.GM.model.changeBackground(filename)
 
     def handleQuit(self):
-        QtGui.QApplication.quit()
+        Qt.QApplication.quit()
 
     def loadTest(self):
         self.GM.model.changeBackground(os.path.join(share_folder, 'default.jpg'))
 
     def askChangeImage(self):
-        confirm_message = QtGui.QMessageBox(text="Changing the image file will erase all points. Are you sure you want to continue?")
-        confirm_message.addButton(QtGui.QMessageBox.Ok)
-        confirm_message.addButton(QtGui.QMessageBox.Cancel)
-        confirm_message.setDefaultButton(QtGui.QMessageBox.Cancel)
+        confirm_message = QtWidgets.QMessageBox(text="Changing the image file will erase all points. Are you sure you want to continue?")
+        confirm_message.addButton(QtWidgets.QMessageBox.Ok)
+        confirm_message.addButton(QtWidgets.QMessageBox.Cancel)
+        confirm_message.setDefaultButton(QtWidgets.QMessageBox.Cancel)
         # FOR DEVEL PERIOD ONLY
         #confirm_status = confirm_message.exec_() # "exec" (without _) worked with python3
-        confirm_status =  QtGui.QMessageBox.Ok
-        if confirm_status == QtGui.QMessageBox.Ok:
-            file_name = QtGui.QFileDialog(parent=None,caption="Select the image file", directory='').getOpenFileName()
+        confirm_status =  QtWidgets.QMessageBox.Ok
+        if confirm_status == QtWidgets.QMessageBox.Ok:
+            file_name, _ = QtWidgets.QFileDialog(parent=None,caption="Select the image file", directory='').getOpenFileName() # returns a tuple
         else:
             file_name = None
 
@@ -491,10 +495,10 @@ def getDictKeyFromItem(mydict, item_searched):
             return key
     return None
 
-class Canvas(QtGui.QGraphicsView):
+class Canvas(QtWidgets.QGraphicsView):
     def __init__(self, GM, parent_win):
-        QtGui.QGraphicsView.__init__(self, parent_win)
-        self.scene = QtGui.QGraphicsScene()
+        QtWidgets.QGraphicsView.__init__(self, parent_win)
+        self.scene = QtWidgets.QGraphicsScene()
         self.setScene(self.scene)
         self.background_item = None
         self.borders = None
@@ -540,7 +544,7 @@ class Canvas(QtGui.QGraphicsView):
         if delta < 0:
             factor = 1.0 / factor
         logging.debug("Zooming in or out")
-        self.setTransformationAnchor(QtGui.QGraphicsView.AnchorUnderMouse)
+        self.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorUnderMouse)
         self.scale(factor, factor)
 
     def rescalePointsAndBorders(self, delta):
@@ -557,15 +561,15 @@ class Canvas(QtGui.QGraphicsView):
     def mousePressEvent(self, event):
         pos_in_scene = self.mapToScene(event.pos())
         if translateEvent(event) == 'ctrl + left click':
-            self.setTransformationAnchor(QtGui.QGraphicsView.NoAnchor)
+            self.setTransformationAnchor(QtWidgets.QGraphicsView.NoAnchor)
             self.scene_offset = self.mapToScene(event.pos())
-        elif translateEvent(event) == 'left click' and self.scene.itemAt(pos_in_scene) == self.background_item:
+        elif translateEvent(event) == 'left click' and self.scene.itemAt(pos_in_scene, QtGui.QTransform()) == self.background_item:
             pos_x = pos_in_scene.x()
             pos_y = pos_in_scene.y()
             self.GM.model.addPoint(pos_x, pos_y)
 
         else:
-            QtGui.QGraphicsView.mousePressEvent(self,event)
+            QtWidgets.QGraphicsView.mousePressEvent(self,event)
             logging.debug("Calling built-in QGraphicsView.mousePressEvent")
 
     def mouseMoveEvent(self, event):
@@ -574,28 +578,30 @@ class Canvas(QtGui.QGraphicsView):
             translate_by = self.mapToScene(event.pos()) - self.scene_offset
             self.translate(translate_by.x(), translate_by.y())
         else:
-            QtGui.QGraphicsView.mouseMoveEvent(self,event)
+            QtWidgets.QGraphicsView.mouseMoveEvent(self,event)
 
     def mouseReleaseEvent(self, event):
         if translateEvent(event) == 'ctrl + left release':
-            self.setTransformationAnchor(QtGui.QGraphicsView.AnchorViewCenter)
+            self.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
         else:
-            QtGui.QGraphicsView.mouseReleaseEvent(self,event)
+            QtWidgets.QGraphicsView.mouseReleaseEvent(self,event)
 
     def wheelEvent(self, event):
         if translateEvent(event) == 'ctrl + wheel': # zoom the canvas in or out
-            self.rescaleCanvas(event.delta())
+            delta = event.angleDelta().y()
+            self.rescaleCanvas(delta)
         elif translateEvent(event) == 'alt + wheel': # zoom the points and borders
-            self.rescalePointsAndBorders(event.delta())
+            delta = event.angleDelta().x() # it seems alt + scroll emulates a horizontal scroll
+            self.rescalePointsAndBorders(delta)
         else:
-            QtGui.QGraphicsView.wheelEvent(self,event)
+            QtWidgets.QGraphicsView.wheelEvent(self,event)
 
-class CBorderLine(QtGui.QGraphicsItemGroup):
+class CBorderLine(QtWidgets.QGraphicsItemGroup):
     def __init__(self, border_type, GM):
         self.GM = GM
-        QtGui.QGraphicsItemGroup.__init__(self, parent = None)
-        self.thick_line = QtGui.QGraphicsLineItem(1,2,3,4)
-        self.thin_line = QtGui.QGraphicsLineItem(1,2,3,4)
+        QtWidgets.QGraphicsItemGroup.__init__(self, parent = None)
+        self.thick_line = QtWidgets.QGraphicsLineItem(1,2,3,4)
+        self.thin_line = QtWidgets.QGraphicsLineItem(1,2,3,4)
         self.addToGroup(self.thin_line)
         self.addToGroup(self.thick_line)
         self.GM.GUI.win.canvas.scene.addItem(self)
@@ -673,7 +679,7 @@ class CBorders:
 # THE MAIN
 ###
     
-app = QtGui.QApplication(sys.argv)
+app = Qt.QApplication(sys.argv)
 myapp = CGUIManager()
 #myapp = CApplication()
 
