@@ -196,7 +196,7 @@ class CUserParam:
 def displayHelpMessage():
 #    webbrowser.open_new(
     module_dir = os.path.dirname(__file__)
-    help_file = os.path.join(module_dir,"help","help.html")
+    help_file = os.path.join(module_dir,"help","README.html")
     webbrowser.open_new(help_file)
 
 class CGUIManager:
@@ -704,6 +704,7 @@ if __name__ == "__main__":
         # Thin dashed-line outsite the rectangle to ease alignment
         # How can I display the unclickable area outside of the image in the canvas?
         # Import image from clipboard
+        # QLineEdits should be smaller
         # export data to file (and not only clipboard)
         # ability to rotate the background image
         # a check box to decide whether to sort the points (xy graph), or not (parametric graph)
