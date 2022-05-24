@@ -1,5 +1,11 @@
 # This script builds the help directory from README.md file (in the root directory)
 # It requires jekyll being installed and configured
+
+# Make sure that we're running the script from the local directory
+echo $0
+cd `dirname "$0"`
+
+
 echo This script will overwrite the 'help' directory. Do you want to proceed? [y/N]
 read answer
 if [[ "$answer" == "y" || "$answer" == "Y" ]] ; then
