@@ -38,7 +38,7 @@
 <h2 id="detailed-description">Detailed description</h2>
 <p>Sometimes, interesting numerical data is available as a graph embedded in a picture, instead of a data table. When the data must be processed or used in a calculation, one has to manually choose a few points on the graph and extract their coordinates, in order to create a data table. This program aims at assisting the user in this laborious process. The image is printed on the screen, and the user can click on the curve to mark the points of interest that will be extracted from the graph. The scale, ie the conversion factor between pixels on the screen and the real values, is inferred by locating vertical lines of known abcissa, and horizontal lines of known ordinate (usually the axes of the graph). With the points (and their coordinates in pixels) and the scale, the program can output a data table consistent with the original data.</p>
 
-<p><img src="./screenshot.png?raw=true" alt="Screenshot" /></p>
+<p><img src="./screenshot.png" alt="Screenshot" /></p>
 
 <p>Example of output stored in clipboard:</p>
 
@@ -49,6 +49,14 @@
 </code></pre></div></div>
 
 <h2 id="how-to-use-this-program">How to use this program</h2>
+
+<p>You need the following packages:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">python3</code></li>
+  <li><code class="language-plaintext highlighter-rouge">python3-PyQt5</code></li>
+  <li><code class="language-plaintext highlighter-rouge">python3-PyQt5-svg</code></li>
+  <li><code class="language-plaintext highlighter-rouge">python3-appdirs</code></li>
+</ul>
 
 <p>Run <code class="language-plaintext highlighter-rouge">graph_scanner.py</code>.</p>
 

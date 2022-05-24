@@ -20,6 +20,12 @@ Example of output stored in clipboard:
 
 ## How to use this program
 
+You need the following packages:
+* `python3`
+* `python3-PyQt5`
+* `python3-PyQt5-svg`
+* `python3-appdirs`
+
 Run `graph_scanner.py`.
 
 Load the image with the "Browse image" button.
