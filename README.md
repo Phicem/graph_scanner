@@ -1,8 +1,3 @@
----
-layout: default
-title: Graph Scanner - Documentation
-#description: Module documentation
----
 # GRAPH SCANNER - PROJECT PAGE
 
 This software intends to ease the process of extracting numerical data from a graph. The user loads the image of the graph, manually clicks on the datapoints to extract, and send the data to the clipboard.
@@ -10,7 +5,7 @@ This software intends to ease the process of extracting numerical data from a gr
 ## Detailed description
 Sometimes, interesting numerical data is available as a graph embedded in a picture, instead of a data table. When the data must be processed or used in a calculation, one has to manually choose a few points on the graph and extract their coordinates, in order to create a data table. This program aims at assisting the user in this laborious process. The image is printed on the screen, and the user can click on the curve to mark the points of interest that will be extracted from the graph. The scale, ie the conversion factor between pixels on the screen and the real values, is inferred by locating vertical lines of known abcissa, and horizontal lines of known ordinate (usually the axes of the graph). With the points (and their coordinates in pixels) and the scale, the program can output a data table consistent with the original data.
 
-![Screenshot](screenshot.png)
+![Screenshot](./screenshot.png)
 
 Example of output stored in clipboard:
 

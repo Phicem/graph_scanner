@@ -10,8 +10,8 @@ echo This script will overwrite the 'help' directory. Do you want to proceed? [y
 read answer
 if [[ "$answer" == "y" || "$answer" == "Y" ]] ; then
     mkdir -p build-docs
-    cp ../README.md build-docs/
-    cp screenshot.png build-docs
+    cat header.txt ../README.md > build-docs/README.md
+    cp ../screenshot.png build-docs
     cp _config.yml build-docs
     cd build-docs
     jekyll build
